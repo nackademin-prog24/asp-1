@@ -1,0 +1,14 @@
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\bin\Debug\net9.0\Data.deps.json
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\bin\Debug\net9.0\Data.runtimeconfig.json
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\bin\Debug\net9.0\Data.dll
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\bin\Debug\net9.0\Data.pdb
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.csproj.AssemblyReference.cache
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.AssemblyInfoInputs.cache
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.AssemblyInfo.cs
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.csproj.CoreCompileInputs.cache
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.dll
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\refint\Data.dll
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.pdb
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\Data.genruntimeconfig.cache
+C:\Projects\prog24\asp1\lektion-1\Lecture_1\Data\obj\Debug\net9.0\ref\Data.dll

@@ -2,7 +2,7 @@
 
 namespace Data.Entities;
 
-public class ClientContactInformationEntity
+public class ClientInformationEntity
 {
     [Key]
     public int ClientId { get; set; }

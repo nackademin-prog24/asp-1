@@ -13,7 +13,7 @@ public class ClientEntity
     public DateTime Modified { get; set; }
     public bool IsActive { get; set; }
 
-    public virtual ClientContactInformationEntity ContactInformation { get; set; } = null!;
+    public virtual ClientInformationEntity ContactInformation { get; set; } = null!;
     public virtual ClientAddressEntity Address { get; set; } = null!;
 
 }

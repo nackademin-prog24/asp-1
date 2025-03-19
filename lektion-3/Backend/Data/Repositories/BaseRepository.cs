@@ -17,9 +17,28 @@ public abstract class BaseRepository<TEntity> where TEntity : class
     }
 
     public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate) => await _dbSet.AnyAsync(predicate);
-    public virtual async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate) => await _dbSet.FirstOrDefaultAsync(predicate);
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.ToListAsync();
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate) => await _dbSet.Where(predicate).ToListAsync();
+
+
+    
+    
+
+
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => 
+        await _dbSet.ToListAsync();
+    public virtual async Task<IEnumerable<T>> GetAllAsync<T>(Expression<Func<TEntity, T>> selector) => 
+        await _dbSet.Select(selector).ToListAsync();
+
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate) => 
+        await _dbSet.Where(predicate).ToListAsync();
+    public virtual async Task<IEnumerable<T>> GetAllAsync<T>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, T>> selector) => 
+        await _dbSet.Where(predicate).Select(selector).ToListAsync();
+
+    public virtual async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate) => 
+        await _dbSet.FirstOrDefaultAsync(predicate);
+
+    public virtual async Task<T?> GetAsync<T>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, T>> selector) =>
+        await _dbSet.Where(predicate).Select(selector).FirstOrDefaultAsync();
+
 
     public virtual async Task<bool> AddAsync(TEntity entity)
     {

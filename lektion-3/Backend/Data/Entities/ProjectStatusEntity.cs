@@ -5,7 +5,7 @@ namespace Data.Entities;
 
 
 [Index(nameof(StatusName), IsUnique = true)]
-public class StatusEntity
+public class ProjectStatusEntity
 {
     [Key]
     public int Id { get; set; }

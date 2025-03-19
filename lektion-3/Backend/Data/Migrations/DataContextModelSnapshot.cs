@@ -47,26 +47,6 @@ namespace Data.Migrations
                     b.ToTable("ClientAddresses");
                 });
 
-            modelBuilder.Entity("Data.Entities.ClientContactInformationEntity", b =>
-                {
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Reference")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ClientId");
-
-                    b.ToTable("ClientContactInformation");
-                });
-
             modelBuilder.Entity("Data.Entities.ClientEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -96,7 +76,27 @@ namespace Data.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Data.Entities.StatusEntity", b =>
+            modelBuilder.Entity("Data.Entities.ClientInformationEntity", b =>
+                {
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ClientId");
+
+                    b.ToTable("ClientInformation");
+                });
+
+            modelBuilder.Entity("Data.Entities.ProjectStatusEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,11 +127,11 @@ namespace Data.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Data.Entities.ClientContactInformationEntity", b =>
+            modelBuilder.Entity("Data.Entities.ClientInformationEntity", b =>
                 {
                     b.HasOne("Data.Entities.ClientEntity", "Client")
                         .WithOne("ContactInformation")
-                        .HasForeignKey("Data.Entities.ClientContactInformationEntity", "ClientId")
+                        .HasForeignKey("Data.Entities.ClientInformationEntity", "ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

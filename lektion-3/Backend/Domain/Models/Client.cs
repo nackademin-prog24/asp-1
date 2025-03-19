@@ -7,9 +7,20 @@ public class Client
     public DateTime? Created { get; set; }
     public DateTime? Modified { get; set; }
     public bool? IsActive { get; set; }
+    public ClientInformation ClientInformation { get; set; } = new();
+    public ClientAddress ClientAddress { get; set; } = new();
+}
+
+public class ClientInformation
+{
     public string? Email { get; set; }
     public string? Phone { get; set; }
     public string? Reference { get; set; }
+
+}
+
+public class ClientAddress
+{
     public string? StreetName { get; set; }
     public string? StreetNumber { get; set; }
     public string? PostalCode { get; set; }

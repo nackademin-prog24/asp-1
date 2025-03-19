@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class StatusAndClientAdded : Migration
+    public partial class DatabaseTableUpdated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,7 +62,7 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientContactInformation",
+                name: "ClientInformation",
                 columns: table => new
                 {
                     ClientId = table.Column<int>(type: "int", nullable: false),
@@ -72,9 +72,9 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientContactInformation", x => x.ClientId);
+                    table.PrimaryKey("PK_ClientInformation", x => x.ClientId);
                     table.ForeignKey(
-                        name: "FK_ClientContactInformation_Clients_ClientId",
+                        name: "FK_ClientInformation_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -101,7 +101,7 @@ namespace Data.Migrations
                 name: "ClientAddresses");
 
             migrationBuilder.DropTable(
-                name: "ClientContactInformation");
+                name: "ClientInformation");
 
             migrationBuilder.DropTable(
                 name: "ProjectStatuses");

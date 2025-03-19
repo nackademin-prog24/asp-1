@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
           if (res.ok) {
             const data = await response.json();
-            setAuth({ accessToken: data.accessToken, role: data.role, isAuthenticated: false, loading: false });
+            setAuth({ accessToken: data.accessToken, role: data.role, isAuthenticated: true, loading: false });
           }  
 
         } catch (error) {

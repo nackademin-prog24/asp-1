@@ -331,7 +331,7 @@ a {
             }
         }
 
-        > :hover {
+        &:hover {
             color: var(--navlink-text-hover-color);
             background-color: var(--navlink-background-hover-color);
         }

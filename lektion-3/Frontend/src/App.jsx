@@ -6,6 +6,15 @@ import { BrowserRouter, useRoutes } from "react-router-dom"
 import routesConfig from "./routing/RoutesConfig"
 import Providers from "./Providers"
 
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+)
+
 function App() {
   const routing = useRoutes(routesConfig)
 
@@ -15,14 +24,5 @@ function App() {
     </Providers>
   )
 }
-
-const root = createRoot(document.getElementById('root'));
-root.render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>
-)
 
 export default App

@@ -1,0 +1,35 @@
+@WebApi_HostAddress = http://localhost:5204
+
+### Hämta alla clients
+GET {{WebApi_HostAddress}}/api/clients/
+Accept: application/json
+
+### Hämta en specifik client (exempel: client med id 1)
+GET {{WebApi_HostAddress}}/api/clients/1
+Accept: application/json
+
+### Hämta en specifik client via query parameter
+GET {{WebApi_HostAddress}}/api/clients?id=1
+Accept: application/json
+
+### Skapa en ny client
+POST {{WebApi_HostAddress}}/api/clients/
+Content-Type: application/json
+
+{
+  "name": "Nackademin AB",
+  "email": "info@nackademin.se",
+  "phone": "08-466 60 00"
+}
+
+### Hämta alla statuses
+GET {{WebApi_HostAddress}}/api/statuses/
+Accept: application/json
+
+### Hämta alla members
+GET {{WebApi_HostAddress}}/api/members/
+Accept: application/json
+
+### Hämta alla projects
+GET {{WebApi_HostAddress}}/api/projects/
+Accept: application/json

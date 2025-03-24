@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{5C13808D-D711-4C3B-ACEC-325112554FB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{BA7FFFCF-0490-4AC3-856D-26DAE1DF3A57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C13808D-D711-4C3B-ACEC-325112554FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C13808D-D711-4C3B-ACEC-325112554FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C13808D-D711-4C3B-ACEC-325112554FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C13808D-D711-4C3B-ACEC-325112554FB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA7FFFCF-0490-4AC3-856D-26DAE1DF3A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA7FFFCF-0490-4AC3-856D-26DAE1DF3A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA7FFFCF-0490-4AC3-856D-26DAE1DF3A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA7FFFCF-0490-4AC3-856D-26DAE1DF3A57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8AA85DF6-BE7A-43DA-B868-F53021ACDE1E}
+	EndGlobalSection
+EndGlobal

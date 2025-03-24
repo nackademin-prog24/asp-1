@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "WebApi.Controllers.AuthController",
+    "Method": "SignInAsync",
+    "RelativePath": "api/Auth/signin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "form",
+        "Type": "Authentication.Models.SignInform",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.AuthController",
+    "Method": "SignUp",
+    "RelativePath": "api/Auth/signup",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "form",
+        "Type": "Authentication.Models.SignUpForm",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

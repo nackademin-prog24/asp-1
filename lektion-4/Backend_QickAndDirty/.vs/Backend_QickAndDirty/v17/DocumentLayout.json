@@ -54,22 +54,20 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "dbo.UserAddresses [Data]",
+              "Title": "dbo.UserAddresses.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__PROJECTS_PROG24_ASP1_LEKTION_4_BACKEND_QICKANDDIRTY_WEBAPI_DATA_DATABASE.MDF/True/SqlTable/dbo.UserAddresses.sql",
-              "ToolTip": "dbo.UserAddresses [Data]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__PROJECTS_PROG24_ASP1_LEKTION_4_BACKEND_QICKANDDIRTY_WEBAPI_DATA_DATABASE.MDF/True/SqlTable/dbo.UserAddresses.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-03-24T13:52:29.052Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T13:52:29.052Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dbo.AspNetUsers [Data]",
+              "Title": "dbo.AspNetUsers.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__PROJECTS_PROG24_ASP1_LEKTION_4_BACKEND_QICKANDDIRTY_WEBAPI_DATA_DATABASE.MDF/True/SqlTable/dbo.AspNetUsers.sql",
-              "ToolTip": "dbo.AspNetUsers [Data]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__PROJECTS_PROG24_ASP1_LEKTION_4_BACKEND_QICKANDDIRTY_WEBAPI_DATA_DATABASE.MDF/True/SqlTable/dbo.AspNetUsers.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-03-24T13:51:44.562Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T13:51:44.562Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "WebApi\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T13:46:36.117Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T13:46:36.117Z"
             },
             {
               "$type": "Document",
@@ -94,8 +91,7 @@
               "RelativeToolTip": "Business\\Managers\\TokenManager.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwBMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T13:45:23.231Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T13:45:23.231Z"
             },
             {
               "$type": "Document",
@@ -107,8 +103,7 @@
               "RelativeToolTip": "Authentication\\Services\\AuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T13:30:03.239Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T13:30:03.239Z"
             },
             {
               "$type": "Document",
@@ -120,8 +115,7 @@
               "RelativeToolTip": "WebApi\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAQwCQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T13:28:31.694Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T13:28:31.694Z"
             }
           ]
         }

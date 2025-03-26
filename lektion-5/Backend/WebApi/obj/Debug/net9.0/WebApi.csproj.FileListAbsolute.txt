@@ -171,3 +171,4 @@ C:\Projects\prog24\asp1\lektion-5\Backend\WebApi\obj\Debug\net9.0\ref\WebApi.dll
 C:\Projects\prog24\asp1\lektion-5\Backend\WebApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Projects\prog24\asp1\lektion-5\Backend\WebApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Projects\prog24\asp1\lektion-5\Backend\WebApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Projects\prog24\asp1\lektion-5\Backend\WebApi\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

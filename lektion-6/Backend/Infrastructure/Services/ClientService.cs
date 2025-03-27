@@ -38,7 +38,7 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
     public async Task<Client> GetUserByClientNameAsync(string clientName)
     {
-        var entity = await _clientRepository.GetAsync(x => x.ClientName == clientName);
+        var entity = await _clientRepository.GetAsync(x => x.ClientName.Equals(clientName, StringComparison.CurrentCultureIgnoreCase));
         return entity == null ? null! : new Client
         {
             Id = entity.Id,

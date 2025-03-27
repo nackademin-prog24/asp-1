@@ -1,168 +1,87 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.Factories;
+using Infrastructure.Models;
 using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
+public interface IProjectService
+{
+    Task<bool> CreateProjectAsync(AddProjectFormData formData, string defaultStatus = "started");
+    Task<bool> DeleteProjectAsync(string id);
+    Task<Project> GetProjectByIdAsync(string id);
+    Task<IEnumerable<Project>> GetProjectsAsync();
+    Task<bool> UpdateProjectAsync(EditProjectFormData formData);
+}
 
-public class ProjectService(IProjectRepository projectRepository, IStatusService statusService)
+public class ProjectService(IProjectRepository projectRepository, IStatusService statusService) : IProjectService
 {
     private readonly IProjectRepository _projectRepository = projectRepository;
     private readonly IStatusService _statusService = statusService;
 
 
-    public async Task<IEnumerable<Project>> GetProjectsAsync()
+    public async Task<bool> CreateProjectAsync(AddProjectFormData formData, string defaultStatus = "STARTED")
     {
-        var entites = await _projectRepository.GetAllAsync(
-            orderByDescending: true, 
-            sortBy: x => x.Created, 
-            filterBy: null, 
-            i => i.User,
-            i => i.Client,
-            i => i.Status
-        );
+        if (formData == null)
+            return false;
 
-        var projects = entites.Select(entity => new Project
-        {
-            Id = entity.Id,
-            Image = entity.Image,
-            ProjectName = entity.ProjectName,
-            Description = entity.Description,
-            StartDate = entity.StartDate,
-            EndDate = entity.EndDate,
-            Client = new Client
-            {
-                Id = entity.Client.Id,
-                ClientName = entity.Client.ClientName
-            },
-            User = new User
-            {
-                Id = entity.User.Id,
-                FirstName = entity.User.FirstName,
-                LastName = entity.User.LastName
-            },
-            Status = new Status
-            {
-                Id = entity.Status.Id,
-                StatusName = entity.Status.StatusName
-            }
-        });
+        var projectEntity = ProjectFactory.ToEntity(formData);
+        var status = await _statusService.GetStatusByStatusNameAsync(defaultStatus);
 
-        return projects;
+        if (status != null && status.Id != 0)
+            projectEntity.StatusId = status.Id;
+        else
+            return false;
+
+        var result = await _projectRepository.AddAsync(projectEntity);
+        return result;
     }
 
 
-    public async Task<IEnumerable<Project>> GetProjectsByClientIdAsync(string clientId)
+    public async Task<IEnumerable<Project>> GetProjectsAsync()
     {
         var entites = await _projectRepository.GetAllAsync(
             orderByDescending: true,
             sortBy: x => x.Created,
-            filterBy: x => x.ClientId == clientId,
+            filterBy: null,
             i => i.User,
             i => i.Client,
             i => i.Status
         );
 
-        var projects = entites.Select(entity => new Project
-        {
-            Id = entity.Id,
-            Image = entity.Image,
-            ProjectName = entity.ProjectName,
-            Description = entity.Description,
-            StartDate = entity.StartDate,
-            EndDate = entity.EndDate,
-            Client = new Client
-            {
-                Id = entity.Client.Id,
-                ClientName = entity.Client.ClientName
-            },
-            User = new User
-            {
-                Id = entity.User.Id,
-                FirstName = entity.User.FirstName,
-                LastName = entity.User.LastName
-            },
-            Status = new Status
-            {
-                Id = entity.Status.Id,
-                StatusName = entity.Status.StatusName
-            }
-        });
-
+        var projects = entites.Select(ProjectFactory.ToModel);
         return projects;
     }
-
 
     public async Task<Project> GetProjectByIdAsync(string id)
     {
         var entity = await _projectRepository.GetAsync(
-          
+
             x => x.Id == id,
             i => i.User,
             i => i.Client,
             i => i.Status
         );
-        
-        return entity == null ? null! : new Project
-        {
-            Id = entity.Id,
-            Image = entity.Image,
-            ProjectName = entity.ProjectName,
-            Description = entity.Description,
-            StartDate = entity.StartDate,
-            EndDate = entity.EndDate,
-            Client = new Client
-            {
-                Id = entity.Client.Id,
-                ClientName = entity.Client.ClientName
-            },
-            User = new User
-            {
-                Id = entity.User.Id,
-                FirstName = entity.User.FirstName,
-                LastName = entity.User.LastName
-            },
-            Status = new Status
-            {
-                Id = entity.Status.Id,
-                StatusName = entity.Status.StatusName
-            }
-        };
+
+        return ProjectFactory.ToModel(entity);
     }
 
-    public async Task<Project> GetProjectByProjectNameAsync(string projectName)
+    public async Task<bool> UpdateProjectAsync(EditProjectFormData formData)
     {
-        var entity = await _projectRepository.GetAsync(
+        if (formData == null)
+            return false;
 
-            x => x.ProjectName == projectName,
-            i => i.User,
-            i => i.Client,
-            i => i.Status
-        );
+        if (!await _projectRepository.ExistsAsync(x => x.Id == formData.Id))
+            return false;
 
-        return entity == null ? null! : new Project
-        {
-            Id = entity.Id,
-            Image = entity.Image,
-            ProjectName = entity.ProjectName,
-            Description = entity.Description,
-            StartDate = entity.StartDate,
-            EndDate = entity.EndDate,
-            Client = new Client
-            {
-                Id = entity.Client.Id,
-                ClientName = entity.Client.ClientName
-            },
-            User = new User
-            {
-                Id = entity.User.Id,
-                FirstName = entity.User.FirstName,
-                LastName = entity.User.LastName
-            },
-            Status = new Status
-            {
-                Id = entity.Status.Id,
-                StatusName = entity.Status.StatusName
-            }
-        };
+        var projectEntity = ProjectFactory.ToEntity(formData);
+        var result = await _projectRepository.UpdateAsync(projectEntity);
+        return result;
+    }
+
+
+    public async Task<bool> DeleteProjectAsync(string id)
+    {
+        var result = await _projectRepository.DeleteAsync(x => x.Id == id);
+        return result;
     }
 }

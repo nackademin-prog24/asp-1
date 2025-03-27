@@ -28,7 +28,7 @@ public class ProjectEntity
     public decimal? Budget { get; set; }
 
     [ForeignKey(nameof(Status))]
-    public string StatusId { get; set; } = null!;
+    public int StatusId { get; set; }
     public virtual StatusEntity Status { get; set; } = null!;
     public DateTime Created { get; set; } = DateTime.Now;
 }

@@ -27,7 +27,8 @@ namespace Infrastructure.Migrations
                 name: "Statuses",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -60,7 +61,8 @@ namespace Infrastructure.Migrations
                     EndDate = table.Column<DateTime>(type: "date", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Budget = table.Column<decimal>(type: "money", nullable: true),
-                    StatusId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

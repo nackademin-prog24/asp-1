@@ -5,7 +5,7 @@ namespace Infrastructure.Services;
 
 public interface IClientService
 {
-    Task<IEnumerable<Client>> GeClientsAsync();
+    Task<IEnumerable<Client>> GetClientsAsync();
     Task<Client> GetUserByClientNameAsync(string clientName);
     Task<Client> GetUserByIdAsync(string id);
 }

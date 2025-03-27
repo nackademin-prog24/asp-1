@@ -12,10 +12,19 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
 
     public async Task<IEnumerable<Project>> GetProjectsAsync()
     {
-        var entites = await _projectRepository.GetAllAsync();
+        var entites = await _projectRepository.GetAllAsync(
+            orderByDescending: true, 
+            sortBy: x => x.Created, 
+            filterBy: null, 
+            i => i.User,
+            i => i.Client,
+            i => i.Status
+        );
+
         var projects = entites.Select(entity => new Project
         {
-
+            Id = entity.Id,
+            ProjectName = entity.ProjectName
         });
 
         return projects;

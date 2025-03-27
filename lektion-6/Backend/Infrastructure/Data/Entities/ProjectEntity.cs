@@ -9,6 +9,8 @@ public class ProjectEntity
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string? Image {  get; set; }
 
+    public string ProjectName { get; set; } = null!;
+
     [ForeignKey(nameof(Client))]
     public string ClientId { get; set; } = null!;
     public virtual ClientEntity Client { get; set; } = null!;

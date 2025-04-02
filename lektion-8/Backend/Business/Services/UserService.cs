@@ -9,9 +9,11 @@ namespace Business.Services;
 public interface IUserService
 {
     Task<bool> CreateUserAsync(AddUserFormData userFormData);
+    Task<bool> DeleteUserAsync(string userId);
     Task<User?> GetUserByEmailAsync(string email);
     Task<User?> GetUserByIdAsync(string userId);
     Task<IEnumerable<User>?> GetUsersAsync();
+    Task<bool> UpdateUserAsync(UpdateUserFormData userFormData);
 }
 
 public class UserService(UserRepository userRepository, UserManager<UserEntity> userManager, IMemoryCache cache) : IUserService
@@ -120,6 +122,63 @@ public class UserService(UserRepository userRepository, UserManager<UserEntity> 
         return user;
     }
 
+
+    public async Task<bool> UpdateUserAsync(UpdateUserFormData userFormData)
+    {
+        if (userFormData == null)
+            return false;
+
+        var user = await _userRepository.GetAsync(x => x.Id  == userFormData.UserId);
+        if (user == null) 
+            return false;
+
+        if (user.FirstName != userFormData.FirstName)
+            user.FirstName = userFormData.FirstName;
+
+        if (user.LastName != userFormData.LastName)
+            user.LastName = userFormData.LastName;
+
+        if (user.Email != userFormData.Email)
+            user.Email = userFormData.Email;
+
+        if (user.PhoneNumber != userFormData.PhoneNumber)
+            user.PhoneNumber = userFormData.PhoneNumber;
+
+        if (user.Address?.StreetName != userFormData.StreetName)
+            user.Address!.StreetName = userFormData.StreetName;
+
+        if (user.Address?.PostalCode != userFormData.PostalCode)
+            user.Address!.PostalCode = userFormData.PostalCode;
+
+        if (user.Address?.City != userFormData.City)
+            user.Address!.City = userFormData.City;
+
+        var result = await _userManager.UpdateAsync(user);
+        if (result.Succeeded)
+        {
+            _cache.Remove(_cacheKey_All);
+        }
+
+        return result.Succeeded;
+    }
+
+    public async Task<bool> DeleteUserAsync(string userId)
+    {
+        if (string.IsNullOrEmpty(userId))
+            return false;
+
+        var user = await _userRepository.GetAsync(x => x.Id == userId);
+        if (user == null)
+            return false;
+
+        var result = await _userManager.DeleteAsync(user);
+        if (result.Succeeded)
+        {
+            _cache.Remove(_cacheKey_All);
+        }
+
+        return result.Succeeded;
+    }
 
     public async Task<IEnumerable<User>> SetCache()
     {

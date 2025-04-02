@@ -4,6 +4,7 @@ using Data.Entities;
 using Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Extensions.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -19,6 +20,8 @@ builder.Services.AddScoped<ProjectRepository>();
 builder.Services.AddScoped<IStatusService, StatusService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
 builder.Services.AddIdentity<UserEntity,IdentityRole>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
@@ -27,6 +30,7 @@ var app = builder.Build();
 app.MapOpenApi();
 app.UseHttpsRedirection();
 
+app.UseMiddleware<DefaultApiKeyMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 

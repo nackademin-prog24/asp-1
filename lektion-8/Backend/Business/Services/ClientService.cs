@@ -67,7 +67,6 @@ public class ClientService(ClientRepository clientRepository, IMemoryCache cache
         return client;
     }
 
-
     public async Task<IEnumerable<Client>> SetCache()
     {
         _cache.Remove(_cacheKey_All);

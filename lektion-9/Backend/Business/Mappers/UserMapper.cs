@@ -6,24 +6,25 @@ namespace Business.Mappers;
 
 public static class UserMapper
 {
-    public static UserEntity ToEntity(AddUserFormData? formData)
+    public static UserEntity ToEntity(AddUserForm? formData, string? newImageFileName = null)
     {
         if (formData == null) return null!;
         return new UserEntity 
         { 
+            ImageFileName = newImageFileName,
             FirstName = formData.FirstName,
             LastName = formData.LastName,
             Email = formData.Email
         };
     }
 
-    public static UserEntity ToEntity(UpdateUserFormData? formData, string? imageFileName = null)
+    public static UserEntity ToEntity(UpdateUserForm? formData, string? newImageFileName = null)
     {
         if (formData == null) return null!;
         return new UserEntity
         {
             Id = formData.Id,
-            ImageFileName = imageFileName,
+            ImageFileName = newImageFileName ?? formData.ImageFileName,
             FirstName = formData.FirstName,
             LastName = formData.LastName,
             Email = formData.Email,

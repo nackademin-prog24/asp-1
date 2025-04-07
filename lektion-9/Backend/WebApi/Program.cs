@@ -12,6 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddMemoryCache();
 builder.Services.AddOpenApi();
 
+builder.Services.AddSwaggerGen();
+
+
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped(typeof(ICacheHandler<>), typeof(CacheHandler<>));
@@ -35,6 +39,15 @@ app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Alpha BackOffice API");
+    options.RoutePrefix = string.Empty;
+});
+
 
 app.MapControllers();
 app.MapOpenApi();

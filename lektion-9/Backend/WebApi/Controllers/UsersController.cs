@@ -1,10 +1,11 @@
 ﻿using Business.Dtos;
 using Business.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
+[Produces("application/json")]
+[Consumes("application/json")]
 [Route("api/[controller]")]
 [ApiController]
 public class UsersController(IUserService userService) : ControllerBase
@@ -12,7 +13,8 @@ public class UsersController(IUserService userService) : ControllerBase
     private readonly IUserService _userService = userService;
 
     [HttpPost]
-    public async Task<IActionResult> Create(AddUserFormData formData)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Create(AddUserForm formData)
     {
         if (!ModelState.IsValid)
             return BadRequest(formData);
@@ -39,7 +41,8 @@ public class UsersController(IUserService userService) : ControllerBase
 
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateUserFormData formData)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Update(UpdateUserForm formData)
     {
         var result = await _userService.UpdateUserAsync(formData);
         return result != null ? Ok(result) : NotFound();

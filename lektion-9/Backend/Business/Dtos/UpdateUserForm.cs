@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 
 namespace Business.Dtos;
 
-public class UpdateUserFormData
+public class UpdateUserForm
 {
     [Required]
     public string Id { get; set; } = null!;
+
+    public string? ImageFileName { get; set; }
+    public IFormFile? NewImageFile { get; set; }
+
 
     [Required]
     public string FirstName { get; set; } = null!;

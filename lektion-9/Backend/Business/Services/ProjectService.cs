@@ -7,11 +7,11 @@ namespace Business.Services;
 
 public interface IProjectService
 {
-    Task<Project?> CreateProjectAsync(AddProjectFormData formData);
+    Task<Project?> CreateProjectAsync(AddProjectForm formData);
     Task<bool> DeleteProjectAsync(string id);
     Task<Project?> GetProjectByIdAsync(string id);
     Task<IEnumerable<Project>?> GetProjectsAsync();
-    Task<Project?> UpdateProjectAsync(UpdateProjectFormData formData);
+    Task<Project?> UpdateProjectAsync(UpdateProjectForm formData);
 }
 
 public class ProjectService(ProjectRepository projectRepository, ICacheHandler<IEnumerable<Project>> cacheHandler) : IProjectService
@@ -20,7 +20,7 @@ public class ProjectService(ProjectRepository projectRepository, ICacheHandler<I
     private readonly ICacheHandler<IEnumerable<Project>> _cacheHandler = cacheHandler;
     private const string _cacheKey = "Projects";
 
-    public async Task<Project?> CreateProjectAsync(AddProjectFormData formData)
+    public async Task<Project?> CreateProjectAsync(AddProjectForm formData)
     {
         var entity = ProjectMapper.ToEntity(formData);
         await _projectRepository.AddAsync(entity);
@@ -47,7 +47,7 @@ public class ProjectService(ProjectRepository projectRepository, ICacheHandler<I
         return models.FirstOrDefault(x => x.Id == id);
     }
 
-    public async Task<Project?> UpdateProjectAsync(UpdateProjectFormData formData)
+    public async Task<Project?> UpdateProjectAsync(UpdateProjectForm formData)
     {
         var entity = await _projectRepository.GetAsync(x => x.Id == formData.Id);
         if (entity == null)

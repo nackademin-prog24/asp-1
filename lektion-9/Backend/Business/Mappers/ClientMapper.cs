@@ -6,16 +6,25 @@ namespace Business.Mappers;
 
 public static class ClientMapper
 {
-    public static ClientEntity ToEntity(AddClientFormData? formData)
+    public static ClientEntity ToEntity(AddClientForm? formData, string? newImageFileName = null)
     {
         if (formData == null) return null!;
-        return new ClientEntity { ClientName = formData.ClientName };
+        return new ClientEntity 
+        { 
+            ImageFileName = newImageFileName,
+            ClientName = formData.ClientName 
+        };
     }
 
-    public static ClientEntity ToEntity(UpdateClientFormData? formData)
+    public static ClientEntity ToEntity(UpdateClientForm? formData, string? newImageFileName = null)
     {
         if (formData == null) return null!;
-        return new ClientEntity { Id = formData.Id, ClientName = formData.ClientName };
+        return new ClientEntity 
+        { 
+            Id = formData.Id, 
+            ImageFileName = newImageFileName ?? formData.ImageFileName,
+            ClientName = formData.ClientName 
+        };
     }
 
     public static Client ToModel(ClientEntity? entity)
@@ -24,6 +33,7 @@ public static class ClientMapper
         return new Client
         {
             Id = entity.Id,
+            ImageFileName = entity.ImageFileName,
             ClientName = entity.ClientName
         };
     }

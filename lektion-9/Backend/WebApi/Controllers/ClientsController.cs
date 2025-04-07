@@ -5,14 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
+[Produces("application/json")]
+[Consumes("application/json")]
 [Route("api/[controller]")]
 [ApiController]
-public class ClientController(IClientService clientService) : ControllerBase
+public class ClientsController(IClientService clientService) : ControllerBase
 {
     private readonly IClientService _clientService = clientService;
 
     [HttpPost]
-    public async Task<ActionResult<Client>> Create([FromForm] AddClientFormData formData)
+    [Consumes("multipart/form-data")]
+    public async Task<ActionResult<Client>> Create(AddClientForm formData)
     {
         if (!ModelState.IsValid)
             return BadRequest(formData);
@@ -36,7 +39,8 @@ public class ClientController(IClientService clientService) : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<Client>> Update(UpdateClientFormData formData)
+    [Consumes("multipart/form-data")]
+    public async Task<ActionResult<Client>> Update(UpdateClientForm formData)
     {
         var result = await _clientService.UpdateClientAsync(formData);
         return result != null ? Ok(result) : NotFound();

@@ -11,4 +11,11 @@ public class User
     public string? StreetName { get; set; }
     public string? PostalCode { get; set; }
     public string? City { get; set; }
+
+    public string DisplayName => $"{FirstName} {LastName}";
+
+    public string Address()
+    {
+        return $"{StreetName}, {PostalCode} {City?.ToUpper()}";   
+    }
 }

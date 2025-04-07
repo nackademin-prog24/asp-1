@@ -8,11 +8,11 @@ namespace Business.Services;
 
 public interface IClientService
 {
-    Task<Client?> CreateClientAsync(AddClientFormData formData);
+    Task<Client?> CreateClientAsync(AddClientForm formData);
     Task<bool> DeleteClientAsync(int id);
     Task<Client?> GetClientByIdAsync(int id);
     Task<IEnumerable<Client>?> GetClientsAsync();
-    Task<Client?> UpdateClientAsync(UpdateClientFormData formData);
+    Task<Client?> UpdateClientAsync(UpdateClientForm formData);
 }
 
 public class ClientService(ClientRepository clientRepository, ICacheHandler<IEnumerable<Client>> cacheHandler) : IClientService
@@ -21,7 +21,7 @@ public class ClientService(ClientRepository clientRepository, ICacheHandler<IEnu
     private readonly ICacheHandler<IEnumerable<Client>> _cacheHandler = cacheHandler;
     private const string _cacheKey = "Clients";
 
-    public async Task<Client?> CreateClientAsync(AddClientFormData formData)
+    public async Task<Client?> CreateClientAsync(AddClientForm formData)
     {
         var entity = ClientMapper.ToEntity(formData);
         await _clientRepository.AddAsync(entity);
@@ -48,7 +48,7 @@ public class ClientService(ClientRepository clientRepository, ICacheHandler<IEnu
         return models.FirstOrDefault(x => x.Id == id);
     }
 
-    public async Task<Client?> UpdateClientAsync(UpdateClientFormData formData)
+    public async Task<Client?> UpdateClientAsync(UpdateClientForm formData)
     {
         var entity = await _clientRepository.GetAsync(x => x.Id == formData.Id);
         if (entity == null)

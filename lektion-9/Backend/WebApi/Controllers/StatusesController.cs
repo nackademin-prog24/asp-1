@@ -1,10 +1,11 @@
 ﻿using Business.Dtos;
 using Business.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
+[Produces("application/json")]
+[Consumes("application/json")]
 [Route("api/[controller]")]
 [ApiController]
 public class StatusesController(IStatusService statusService) : ControllerBase
@@ -12,7 +13,7 @@ public class StatusesController(IStatusService statusService) : ControllerBase
     private readonly IStatusService _statusService = statusService;
 
     [HttpPost]
-    public async Task<IActionResult> Create(AddStatusFormData formData)
+    public async Task<IActionResult> Create(AddStatusForm formData)
     {
         if (!ModelState.IsValid)
             return BadRequest(formData);
@@ -37,7 +38,7 @@ public class StatusesController(IStatusService statusService) : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateStatusFormData formData)
+    public async Task<IActionResult> Update(UpdateStatusForm formData)
     {
         var result = await _statusService.UpdateStatusAsync(formData);
         return result != null ? Ok(result) : NotFound();

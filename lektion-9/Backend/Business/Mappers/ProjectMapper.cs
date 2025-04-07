@@ -6,12 +6,12 @@ namespace Business.Mappers;
 
 public static class ProjectMapper
 {
-    public static ProjectEntity ToEntity(AddProjectFormData? formData, string? imageFileName = null)
+    public static ProjectEntity ToEntity(AddProjectForm? formData, string? newImageFileName = null)
     {
         if (formData == null) return null!;
         return new ProjectEntity 
         {
-            ImageFileName = imageFileName,
+            ImageFileName = newImageFileName,
             ProjectName = formData.ProjectName,
             ClientId = formData.ClientId,
             Description = formData.Description,
@@ -22,13 +22,13 @@ public static class ProjectMapper
         };
     }
 
-    public static ProjectEntity ToEntity(UpdateProjectFormData? formData, string? imageFileName = null)
+    public static ProjectEntity ToEntity(UpdateProjectForm? formData, string? newImageFileName = null)
     {
         if (formData == null) return null!;
         return new ProjectEntity
         {
             Id = formData.Id,
-            ImageFileName = imageFileName ?? formData.ExistingImageFileName,
+            ImageFileName = newImageFileName ?? formData.ImageFileName,
             ProjectName = formData.ProjectName,
             ClientId = formData.ClientId,
             Description = formData.Description,

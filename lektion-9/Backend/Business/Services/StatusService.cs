@@ -8,11 +8,11 @@ namespace Business.Services;
 
 public interface IStatusService
 {
-    Task<Status?> CreateStatusAsync(AddStatusFormData formData);
+    Task<Status?> CreateStatusAsync(AddStatusForm formData);
     Task<bool> DeleteStatusAsync(int id);
     Task<Status?> GetStatusByIdAsync(int id);
     Task<IEnumerable<Status>?> GetStatusesAsync();
-    Task<Status?> UpdateStatusAsync(UpdateStatusFormData formData);
+    Task<Status?> UpdateStatusAsync(UpdateStatusForm formData);
 }
 
 public class StatusService(StatusRepository statusRepository, ICacheHandler<IEnumerable<Status>> cacheHandler) : IStatusService
@@ -22,7 +22,7 @@ public class StatusService(StatusRepository statusRepository, ICacheHandler<IEnu
     private const string _cacheKey = "Statuses";
 
 
-    public async Task<Status?> CreateStatusAsync(AddStatusFormData formData)
+    public async Task<Status?> CreateStatusAsync(AddStatusForm formData)
     {
         var entity = StatusMapper.ToEntity(formData);
         await _statusRepository.AddAsync(entity);
@@ -49,7 +49,7 @@ public class StatusService(StatusRepository statusRepository, ICacheHandler<IEnu
         return models.FirstOrDefault(x => x.Id == id);
     }
 
-    public async Task<Status?> UpdateStatusAsync(UpdateStatusFormData formData)
+    public async Task<Status?> UpdateStatusAsync(UpdateStatusForm formData)
     {
         var entity = await _statusRepository.GetAsync(x => x.Id == formData.Id);
         if (entity == null)

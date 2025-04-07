@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 
 namespace Business.Dtos;
 
-public class AddProjectFormData
+public class UpdateProjectForm
 {
-    public IFormFile? ImageFile { get; set; }
+    [Required]
+    public string Id { get; set; } = null!;
+
+    public string? ImageFileName { get; set; }
+    public IFormFile? NewImageFile { get; set; }
 
     [Required]
     public string ProjectName { get; set; } = null!;
@@ -27,4 +32,7 @@ public class AddProjectFormData
 
     [Required]
     public string UserId { get; set; } = null!;
+
+    [Required]
+    public int StatusId { get; set; }
 }

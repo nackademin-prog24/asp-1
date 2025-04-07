@@ -1,11 +1,11 @@
 ﻿using Business.Dtos;
 using Business.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
-[Authorize]
+[Produces("application/json")]
+[Consumes("application/json")]
 [Route("api/[controller]")]
 [ApiController]
 public class ProjectsController(IProjectService projectService) : ControllerBase
@@ -13,7 +13,8 @@ public class ProjectsController(IProjectService projectService) : ControllerBase
     private readonly IProjectService _projectService = projectService;
 
     [HttpPost]
-    public async Task<IActionResult> Create(AddProjectFormData formData)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Create(AddProjectForm formData)
     {
         if (!ModelState.IsValid)
             return BadRequest(formData);
@@ -37,7 +38,8 @@ public class ProjectsController(IProjectService projectService) : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateProjectFormData formData)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Update(UpdateProjectForm formData)
     {
         var result = await _projectService.UpdateProjectAsync(formData);
         return result != null ? Ok(result) : NotFound();

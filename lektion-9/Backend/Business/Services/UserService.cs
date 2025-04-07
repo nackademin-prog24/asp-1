@@ -10,12 +10,12 @@ namespace Business.Services;
 
 public interface IUserService
 {
-    Task<User?> CreateUserAsync(AddUserFormData formData);
+    Task<User?> CreateUserAsync(AddUserForm formData);
     Task<bool> DeleteUserAsync(string id);
     Task<User?> GetUserByEmailAsync(string email);
     Task<User?> GetUserByIdAsync(string id);
     Task<IEnumerable<User>?> GetUsersAsync();
-    Task<User?> UpdateUserAsync(UpdateUserFormData formData);
+    Task<User?> UpdateUserAsync(UpdateUserForm formData);
 }
 
 public class UserService(UserRepository userRepository, UserManager<UserEntity> userManager, ICacheHandler<IEnumerable<User>> cacheHandler) : IUserService
@@ -25,7 +25,7 @@ public class UserService(UserRepository userRepository, UserManager<UserEntity> 
     private readonly ICacheHandler<IEnumerable<User>> _cacheHandler = cacheHandler;
     private const string _cacheKey = "Users";
 
-    public async Task<User?> CreateUserAsync(AddUserFormData formData)
+    public async Task<User?> CreateUserAsync(AddUserForm formData)
     {
         var exists = await _userRepository.ExistsAsync(x => x.Email == formData.Email);
         if (exists)
@@ -68,7 +68,7 @@ public class UserService(UserRepository userRepository, UserManager<UserEntity> 
         return models.FirstOrDefault(x => x.Email == email);
     }
 
-    public async Task<User?> UpdateUserAsync(UpdateUserFormData formData)
+    public async Task<User?> UpdateUserAsync(UpdateUserForm formData)
     {
         var entity = await _userRepository.GetAsync(x => x.Id == formData.Id);
         if (entity == null)

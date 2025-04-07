@@ -1,5 +1,4 @@
-﻿using Business.Models;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 
 namespace Business.Handlers;
 

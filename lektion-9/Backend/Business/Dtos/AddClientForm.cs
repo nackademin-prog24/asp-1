@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Business.Dtos;
 
-public class AddClientFormData
+public class AddClientForm
 {
     public IFormFile? ImageFile { get; set; }
 

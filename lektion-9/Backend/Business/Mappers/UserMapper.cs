@@ -11,6 +11,7 @@ public static class UserMapper
         if (formData == null) return null!;
         return new UserEntity
         {
+            UserName  = formData.Email,
             FirstName = formData.FirstName,
             LastName = formData.LastName,
             Email = formData.Email
@@ -21,7 +22,8 @@ public static class UserMapper
     {
         if (formData == null) return null!;
         return new UserEntity 
-        { 
+        {
+            UserName = formData.Email,
             ImageFileName = newImageFileName,
             FirstName = formData.FirstName,
             LastName = formData.LastName,
@@ -35,6 +37,7 @@ public static class UserMapper
         return new UserEntity
         {
             Id = formData.Id,
+            UserName = formData.Email,
             ImageFileName = newImageFileName ?? formData.ImageFileName,
             FirstName = formData.FirstName,
             LastName = formData.LastName,

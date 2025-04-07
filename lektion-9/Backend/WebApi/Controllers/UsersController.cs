@@ -1,13 +1,16 @@
 ﻿using Business.Dtos;
 using Business.Models;
 using Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.Filters;
 using WebApi.Documentation.UserEndpoint;
+using WebApi.Extensions.Attributes;
 
 namespace WebApi.Controllers;
 
+[Authorize]
 [Produces("application/json")]
 [Consumes("application/json")]
 [Route("api/[controller]")]
@@ -17,6 +20,7 @@ public class UsersController(IUserService userService) : ControllerBase
     private readonly IUserService _userService = userService;
 
     [HttpPost]
+    [UseAdminApiKey]
     [Consumes("multipart/form-data")]
     [SwaggerOperation(Summary = "Create a new User", Description = "Only 'admins' can create users. This will require a API-key 'X-ADM-API-KEY' in the header request.")]
     [SwaggerRequestExample(typeof(AddUserForm), typeof(AddUserDataExample))]
@@ -35,7 +39,7 @@ public class UsersController(IUserService userService) : ControllerBase
     }
 
     [HttpGet]
-    [SwaggerOperation(Summary = "Create a new User", Description = "Only 'admins' can create users. This will require a API-key 'X-ADM-API-KEY' in the header request.")]
+    [SwaggerOperation(Summary = "Get all users", Description = "Only 'admins' can create users. This will require a API-key 'X-ADM-API-KEY' in the header request.")]
     [SwaggerResponse(200, "Returns all users", typeof(IEnumerable<User>))]
     public async Task<IActionResult> GetAll()
     {
@@ -53,6 +57,7 @@ public class UsersController(IUserService userService) : ControllerBase
     }
 
     [HttpPut]
+    [UseAdminApiKey]
     [Consumes("multipart/form-data")]
     [SwaggerRequestExample(typeof(UpdateUserForm), typeof(UpdateUserDataExample))]
     [SwaggerResponseExample(200, typeof(UserExample))]
@@ -66,6 +71,7 @@ public class UsersController(IUserService userService) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [UseAdminApiKey]
     [SwaggerResponse(200, "User successfully deleted")]
     [SwaggerResponse(404, "User not found", typeof(ErrorMessage))]
     public async Task<IActionResult> Delete(string id)

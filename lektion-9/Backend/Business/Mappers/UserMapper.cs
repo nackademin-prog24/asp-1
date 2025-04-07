@@ -6,6 +6,17 @@ namespace Business.Mappers;
 
 public static class UserMapper
 {
+    public static UserEntity ToEntity(SignUpForm? formData)
+    {
+        if (formData == null) return null!;
+        return new UserEntity
+        {
+            FirstName = formData.FirstName,
+            LastName = formData.LastName,
+            Email = formData.Email
+        };
+    }
+
     public static UserEntity ToEntity(AddUserForm? formData, string? newImageFileName = null)
     {
         if (formData == null) return null!;

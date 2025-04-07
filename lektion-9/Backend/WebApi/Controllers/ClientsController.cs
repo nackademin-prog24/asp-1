@@ -5,16 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
-[Produces("application/json")]
-[Consumes("application/json")]
 [Route("api/[controller]")]
 [ApiController]
 public class ClientsController(IClientService clientService) : ControllerBase
 {
     private readonly IClientService _clientService = clientService;
 
+
+
     [HttpPost]
-    [Consumes("multipart/form-data")]
     public async Task<ActionResult<Client>> Create(AddClientForm formData)
     {
         if (!ModelState.IsValid)
@@ -39,7 +38,6 @@ public class ClientsController(IClientService clientService) : ControllerBase
     }
 
     [HttpPut]
-    [Consumes("multipart/form-data")]
     public async Task<ActionResult<Client>> Update(UpdateClientForm formData)
     {
         var result = await _clientService.UpdateClientAsync(formData);

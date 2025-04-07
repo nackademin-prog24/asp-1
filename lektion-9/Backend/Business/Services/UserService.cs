@@ -11,6 +11,8 @@ namespace Business.Services;
 public interface IUserService
 {
     Task<User?> CreateUserAsync(AddUserForm formData);
+    Task<User?> CreateUserAsync(SignUpForm formData);
+    Task<bool> LoginUserAsync(SignInForm formData);
     Task<bool> DeleteUserAsync(string id);
     Task<User?> GetUserByEmailAsync(string email);
     Task<User?> GetUserByIdAsync(string id);
@@ -18,12 +20,37 @@ public interface IUserService
     Task<User?> UpdateUserAsync(UpdateUserForm formData);
 }
 
-public class UserService(UserRepository userRepository, UserManager<UserEntity> userManager, ICacheHandler<IEnumerable<User>> cacheHandler) : IUserService
+public class UserService(UserRepository userRepository, UserManager<UserEntity> userManager, ICacheHandler<IEnumerable<User>> cacheHandler, SignInManager<UserEntity> signInManager) : IUserService
 {
     private readonly UserRepository _userRepository = userRepository;
     private readonly UserManager<UserEntity> _userManager = userManager;
+    private readonly SignInManager<UserEntity> _signInManager = signInManager;
     private readonly ICacheHandler<IEnumerable<User>> _cacheHandler = cacheHandler;
     private const string _cacheKey = "Users";
+
+
+    public async Task<bool> LoginUserAsync(SignInForm formData)
+    {
+        var exists = await _userRepository.ExistsAsync(x => x.Email == formData.Email);
+        if (!exists)
+            return false;
+
+        var result = await _signInManager.PasswordSignInAsync(formData.Email, formData.Password, formData.RememberMe, false);
+        return result.Succeeded;
+    }
+
+    public async Task<User?> CreateUserAsync(SignUpForm formData)
+    {
+        var exists = await _userRepository.ExistsAsync(x => x.Email == formData.Email);
+        if (exists)
+            return null!;
+
+        var entity = UserMapper.ToEntity(formData);
+        await _userManager.CreateAsync(entity, formData.Password);
+
+        var models = await UpdateCacheAsync();
+        return models.FirstOrDefault(x => x.Email == formData.Email);
+    }
 
     public async Task<User?> CreateUserAsync(AddUserForm formData)
     {
@@ -32,7 +59,7 @@ public class UserService(UserRepository userRepository, UserManager<UserEntity> 
             return null!;
 
         var entity = UserMapper.ToEntity(formData);
-        await _userManager.CreateAsync(entity, formData.Password);
+        await _userManager.CreateAsync(entity);
 
         var models = await UpdateCacheAsync();
         return models.FirstOrDefault(x => x.Email == formData.Email);

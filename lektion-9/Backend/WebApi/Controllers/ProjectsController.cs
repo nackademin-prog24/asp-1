@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
-[Produces("application/json")]
-[Consumes("application/json")]
 [Route("api/[controller]")]
 [ApiController]
 public class ProjectsController(IProjectService projectService) : ControllerBase
@@ -13,7 +11,6 @@ public class ProjectsController(IProjectService projectService) : ControllerBase
     private readonly IProjectService _projectService = projectService;
 
     [HttpPost]
-    [Consumes("multipart/form-data")]
     public async Task<IActionResult> Create(AddProjectForm formData)
     {
         if (!ModelState.IsValid)
@@ -38,7 +35,6 @@ public class ProjectsController(IProjectService projectService) : ControllerBase
     }
 
     [HttpPut]
-    [Consumes("multipart/form-data")]
     public async Task<IActionResult> Update(UpdateProjectForm formData)
     {
         var result = await _projectService.UpdateProjectAsync(formData);

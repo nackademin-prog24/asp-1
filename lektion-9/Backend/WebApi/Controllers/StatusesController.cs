@@ -1,11 +1,13 @@
 ﻿using Business.Dtos;
+using Business.Models;
 using Business.Services;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.Filters;
+using WebApi.Documentation;
 
 namespace WebApi.Controllers;
 
-[Produces("application/json")]
-[Consumes("application/json")]
 [Route("api/[controller]")]
 [ApiController]
 public class StatusesController(IStatusService statusService) : ControllerBase

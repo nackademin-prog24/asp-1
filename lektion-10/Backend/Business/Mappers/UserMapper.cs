@@ -1,6 +1,4 @@
-﻿using Data.Entities;
-
-namespace Business.Mappers;
+﻿namespace Business.Mappers;
 
 public static class UserMapper
 {

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Controllers;
 
-[Authorize]
+
 [Route("api/[controller]")]
 [ApiController]
 public class UsersController(UserManager<UserEntity> userManager) : ControllerBase
@@ -15,6 +15,7 @@ public class UsersController(UserManager<UserEntity> userManager) : ControllerBa
     private readonly UserManager<UserEntity> _userManager = userManager;
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAll()
     {
         var users = await _userManager.Users.ToListAsync();
@@ -22,6 +23,7 @@ public class UsersController(UserManager<UserEntity> userManager) : ControllerBa
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> Get(string id)
     {
         var users = await _userManager.FindByIdAsync(id);

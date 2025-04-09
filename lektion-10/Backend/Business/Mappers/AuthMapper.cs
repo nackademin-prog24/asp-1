@@ -3,6 +3,7 @@ using Data.Entities;
 
 namespace Business.Mappers;
 
+
 public static class AuthMapper
 {
     public static UserEntity MapToEntity(SignUpDto dto)
